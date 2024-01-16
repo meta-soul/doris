@@ -329,6 +329,12 @@ struct THudiFileDesc {
     10: optional list<string> nested_fields;
 }
 
+struct TLakeSoulFileDesc {
+    1: optional string base_path;
+    2: optional list<string> column_names;
+    3: optional string table_schema;
+}
+
 struct TTransactionalHiveDeleteDeltaDesc {
     1: optional string directory_location
     2: optional list<string> file_names
@@ -346,6 +352,7 @@ struct TTableFormatFileDesc {
     4: optional TPaimonFileDesc paimon_params
     5: optional TTransactionalHiveDesc transactional_hive_params
     6: optional TMaxComputeFileDesc max_compute_params
+    7: optional TLakeSoulFileDesc lakesoul_params
 }
 
 enum TTextSerdeType {

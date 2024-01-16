@@ -44,6 +44,8 @@ import org.apache.doris.planner.external.hudi.HudiScanNode;
 import org.apache.doris.planner.external.hudi.HudiSplit;
 import org.apache.doris.planner.external.iceberg.IcebergScanNode;
 import org.apache.doris.planner.external.iceberg.IcebergSplit;
+import org.apache.doris.planner.external.lakesoul.LakeSoulScanNode;
+import org.apache.doris.planner.external.lakesoul.LakeSoulSplit;
 import org.apache.doris.planner.external.paimon.PaimonScanNode;
 import org.apache.doris.planner.external.paimon.PaimonSplit;
 import org.apache.doris.qe.ConnectContext;
@@ -367,6 +369,8 @@ public abstract class FileQueryScanNode extends FileScanNode {
                 HudiScanNode.setHudiParams(rangeDesc, (HudiSplit) fileSplit);
             } else if (fileSplit instanceof MaxComputeSplit) {
                 MaxComputeScanNode.setScanParams(rangeDesc, (MaxComputeSplit) fileSplit);
+            } else if (fileSplit instanceof LakeSoulSplit) {
+                LakeSoulScanNode.setLakeSoulParams(rangeDesc, (LakeSoulSplit) fileSplit);
             }
 
             curLocations.getScanRange().getExtScanRange().getFileScanRange().addToRanges(rangeDesc);

@@ -15,24 +15,24 @@
 // specific language governing permissions and limitations
 // under the License.
 
-package org.apache.doris.planner.external;
+package org.apache.doris.planner.external.lakesoul;
 
-public enum TableFormatType {
-    HIVE("hive"),
-    ICEBERG("iceberg"),
-    HUDI("hudi"),
-    PAIMON("paimon"),
-    MAX_COMPUTE("max_compute"),
-    TRANSACTIONAL_HIVE("transactional_hive"),
-    LAKESOUL("lakesoul");
+import org.apache.doris.planner.external.FileSplit;
 
-    private final String tableFormatType;
+import lombok.Data;
+import org.apache.hadoop.fs.Path;
 
-    TableFormatType(String tableFormatType) {
-        this.tableFormatType = tableFormatType;
+import java.util.List;
+
+@Data
+public class LakeSoulSplit extends FileSplit {
+
+    public LakeSoulSplit(Path path, long start, long length, long fileLength, String[] hosts,
+            List<String> partitionValues) {
+        super(path, start, length, fileLength, hosts, partitionValues);
     }
 
-    public String value() {
-        return tableFormatType;
-    }
+    private List<String> lakeSoulColumnNames;
+    private String tableSchema;
 }
+

@@ -336,6 +336,12 @@ struct TMCTable {
   6: optional string public_access
 }
 
+struct TLakeSoulTable {
+  1: required string db_name
+  2: required string table_name
+  3: required map<string, string> properties
+}
+
 // "Union" of all table types.
 struct TTableDescriptor {
   1: required Types.TTableId id
@@ -359,6 +365,7 @@ struct TTableDescriptor {
   19: optional THudiTable hudiTable
   20: optional TJdbcTable jdbcTable
   21: optional TMCTable mcTable
+  22: optional TLakeSoulTable lakesoulTable
 }
 
 struct TDescriptorTable {
