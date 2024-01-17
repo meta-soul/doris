@@ -113,7 +113,10 @@ public class LakeSoulExternalTable extends ExternalTable {
         }
         List<Column> tmpSchema = Lists.newArrayListWithCapacity(schema.size());
         for (StructField field : schema.fields()) {
-            tmpSchema.add(new Column(new Column(field.name(), lakeSoulTypeToDorisType(field.dataType()), true, null, true, field.metadata().getString("comment"), true, schema.fieldIndex(field.name()))));
+            tmpSchema.add(new Column(new Column(field.name(), lakeSoulTypeToDorisType(field.dataType()),
+                    true, null, true,
+                    field.metadata().contains("comment") ? field.metadata().getString("comment") : null,
+                    true, schema.fieldIndex(field.name()))));
         }
         return tmpSchema;
     }

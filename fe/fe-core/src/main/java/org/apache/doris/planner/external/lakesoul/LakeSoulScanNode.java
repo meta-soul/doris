@@ -27,6 +27,7 @@ import org.apache.doris.common.UserException;
 import org.apache.doris.nereids.trees.plans.logical.LogicalFileScan;
 import org.apache.doris.planner.PlanNodeId;
 import org.apache.doris.planner.external.FileQueryScanNode;
+import org.apache.doris.planner.external.TableFormatType;
 import org.apache.doris.spi.Split;
 import org.apache.doris.statistics.StatisticalType;
 import org.apache.doris.thrift.TFileFormatType;
@@ -144,6 +145,7 @@ public class LakeSoulScanNode extends FileQueryScanNode {
                         new String[0], null);
                 lakeSoulSplit.setTableSchema(table.getTableSchema());
                 lakeSoulSplit.setLakeSoulColumnNames(Arrays.asList(dataFileInfo.file_exist_cols().split(",")));
+                lakeSoulSplit.setTableFormatType(TableFormatType.LAKESOUL);
                 splits.add(lakeSoulSplit);
 
             }
